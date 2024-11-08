@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @flight_plan %>
+
+<div>
+  <%= link_to "Edit this flight plan", edit_flight_plan_path(@flight_plan) %> |
+  <%= link_to "Back to flight plans", flight_plans_path %>
+
+  <%= button_to "Destroy this flight plan", @flight_plan, method: :delete %>
+</div>

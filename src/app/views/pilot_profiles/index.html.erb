@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Pilot profiles</h1>
+
+<div id="pilot_profiles">
+  <% @pilot_profiles.each do |pilot_profile| %>
+    <%= render pilot_profile %>
+    <p>
+      <%= link_to "Show this pilot profile", pilot_profile %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New pilot profile", new_pilot_profile_path %>

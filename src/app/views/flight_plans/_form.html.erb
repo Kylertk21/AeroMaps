@@ -1,0 +1,67 @@
+<%= form_with(model: flight_plan) do |form| %>
+  <% if flight_plan.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(flight_plan.errors.count, "error") %> prohibited this flight_plan from being saved:</h2>
+
+      <ul>
+        <% flight_plan.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :departure, style: "display: block" %>
+    <%= form.text_field :departure %>
+  </div>
+
+  <div>
+    <%= form.label :time_of_departure, style: "display: block" %>
+    <%= form.time_field :time_of_departure %>
+  </div>
+
+  <div>
+    <%= form.label :route, style: "display: block" %>
+    <%= form.text_field :route %>
+  </div>
+
+  <div>
+    <%= form.label :cruising_altitude, style: "display: block" %>
+    <%= form.number_field :cruising_altitude %>
+  </div>
+
+  <div>
+    <%= form.label :true_airspeed, style: "display: block" %>
+    <%= form.number_field :true_airspeed %>
+  </div>
+
+  <div>
+    <%= form.label :first_landing, style: "display: block" %>
+    <%= form.text_field :first_landing %>
+  </div>
+
+  <div>
+    <%= form.label :time_until_first, style: "display: block" %>
+    <%= form.number_field :time_until_first %>
+  </div>
+
+  <div>
+    <%= form.label :fuel_hours, style: "display: block" %>
+    <%= form.number_field :fuel_hours %>
+  </div>
+
+  <div>
+    <%= form.label :number_of_passengers, style: "display: block" %>
+    <%= form.number_field :number_of_passengers %>
+  </div>
+
+  <div>
+    <%= form.label :extra_info, style: "display: block" %>
+    <%= form.text_area :extra_info %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

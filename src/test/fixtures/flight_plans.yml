@@ -1,0 +1,25 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  departure: MyString
+  time_of_departure: 2024-11-08 09:44:46
+  route: MyString
+  cruising_altitude: 1
+  true_airspeed: 1
+  first_landing: MyString
+  time_until_first: 1
+  fuel_hours: 1
+  number_of_passengers: 1
+  extra_info: MyText
+
+two:
+  departure: MyString
+  time_of_departure: 2024-11-08 09:44:46
+  route: MyString
+  cruising_altitude: 1
+  true_airspeed: 1
+  first_landing: MyString
+  time_until_first: 1
+  fuel_hours: 1
+  number_of_passengers: 1
+  extra_info: MyText
