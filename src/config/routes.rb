@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   resources :forum_posts
   resources :flight_plans
   resources :pilot_profiles

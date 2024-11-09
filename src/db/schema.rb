@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_11_08_100512) do
+ActiveRecord::Schema[7.1].define(version: 2024_11_09_053832) do
   create_table "flight_plans", force: :cascade do |t|
     t.string "departure"
     t.time "time_of_departure"
@@ -56,7 +56,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_08_100512) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "pilot_profiles_id"
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["pilot_profiles_id"], name: "index_users_on_pilot_profiles_id"
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "pilot_profiles", "flight_plans", column: "flight_plans_id"
