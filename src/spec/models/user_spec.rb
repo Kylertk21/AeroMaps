@@ -83,7 +83,7 @@ RSpec.feature "User Registration", type: :feature do
     click_button "Sign up"
 
     expect(page).to have_current_path(root_path)
-    expect(page).to have_content("Home#index")
+    expect(page).to have_content("Home")
   end
 end
 
