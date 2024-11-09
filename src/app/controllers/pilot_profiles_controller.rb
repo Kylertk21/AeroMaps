@@ -1,5 +1,6 @@
 class PilotProfilesController < ApplicationController
   before_action :set_pilot_profile, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!
 
   # GET /pilot_profiles or /pilot_profiles.json
   def index

@@ -1,5 +1,6 @@
 class ForumPostsController < ApplicationController
   before_action :set_forum_post, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!
 
   # GET /forum_posts or /forum_posts.json
   def index

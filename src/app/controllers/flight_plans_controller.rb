@@ -1,5 +1,6 @@
 class FlightPlansController < ApplicationController
   before_action :set_flight_plan, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!
 
   # GET /flight_plans or /flight_plans.json
   def index
