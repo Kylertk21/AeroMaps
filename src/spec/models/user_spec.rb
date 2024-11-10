@@ -1,23 +1,5 @@
 require 'rails_helper'
 
-FactoryBot.define do
-  factory :user do 
-    email { "test@example.com" }
-    password { "password" }
-    password_confirmation { "password" }
-    end
-  trait :empty do
-    email { "" }
-    password { "" }
-    password_confirmation { "" }
-    end
-  trait :invalidpw do 
-    email { "test@example.com" }
-    password { "password" }
-    password_confirmation { "otherpassword" }
-    end
-end
-
 # Rspec Tests
 RSpec.describe "User model authentication", type: :request do 
   
@@ -89,23 +71,22 @@ end
 
 
 feature "User signs in", type: :feature do
-    user = FactoryBot.build(:user)
-    empty_user = FactoryBot.build(:user, :empty)
+    user = FactoryBot.create(:user)
  
-   scenario "User signs in with correct credentials" do 
+   scenario "with correct credentials" do 
     visit '/users/sign_in'
       fill_in "Email", with: user.email
       fill_in "Password", with: user.password
       click_button "Log in"
 
       expect(page).to have_current_path(root_path)
-      expect(page).to have_content("Home#index")
+      expect(page).to have_content("Home")
   end
 
-  scenario "User can't sign in with invalid data" do
+  scenario "With invalid credentials" do
     visit '/users/sign_in'
-      fill_in "Email", with: empty_user.email
-      fill_in "Password", with: empty_user.password
+      fill_in "Email", with: ""
+      fill_in "Password", with: ""
       click_button "Log in"
     
       expect(page).to have_current_path(user_session_path)

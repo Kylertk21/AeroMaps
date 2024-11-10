@@ -1,28 +1,8 @@
 require 'rails_helper'
 
-FactoryBot.define do
-  factory :pilot_profile do 
-    first_name { "testfirst" }
-    last_name { "testlast" }
-    aircraft_ident { "ABC-5432" }
-    aircraft_type { "Cessna Skyhawk" }
-    home_address { "12345 Test Ln, Test City, CO, 80208" }
-    phone_number { 123456789 }
-    bio { "Test, Test, Test, Test" }
-  end
-
-  factory :user do 
-    email { "pilottest@example.com" }
-    password { "password" }
-    password_confirmation { "password" }
-    end
-end
-
-
-
 RSpec.describe "Pilot Profiles", type: :request do 
-  
-  describe "POST /pilot_profiles/new" do # Create a new pilot profile and check that it redirects
+
+  describe "POST /pilot_profiles/new" do # Create a new pilot profile
     context "with valid parameters" do 
       it "creates a new pilot profile" do
       user = FactoryBot.create(:user)
@@ -36,7 +16,6 @@ RSpec.describe "Pilot Profiles", type: :request do
 
       expect(response).to have_http_status(:ok)
       expect(response.body).to include( "testfirst" ) 
-      
       end
   
   describe "GET /pilot_profiles" do # Check that /pilots returns successfully
@@ -48,7 +27,56 @@ RSpec.describe "Pilot Profiles", type: :request do
     
         end
       end
+
+    context "with invalid parameters" do # Post with invalid params
+      it "Doesn't create a new pilot profile with empty fields" do
+        user = FactoryBot.create(:user)
+        sign_in user
+        expect { 
+          post pilot_profiles_path, params: { pilot_profile: attributes_for(:pilot_profile, :emptyprofile) }
+      }.to_not change(PilotProfile, :count)
+
+      expect(response).to have_http_status(422) # Check that profile is not added to 
+                                                # database and 422 error is returned
+      end
     end
+  end
+  
   end
 end
 #TODO: test one to many relationship from profiles to forum posts and flight plans
+
+# Feature Tests 
+
+feature "Pilot Profile creation", type: :feature do
+    user = FactoryBot.create(:user)
+    pilot = FactoryBot.create(:pilot_profile)
+
+    
+
+
+    scenario "Pilot creates profile with valid credentials" do
+
+      # Log In
+      visit "/users/sign_in"
+      fill_in "Email", with: user.email
+      fill_in "Password", with: user.password
+      click_button "Log in"
+
+      # Fill out form fields ad create pilot profile
+      visit "/pilot_profiles/new"
+      fill_in "First name", with: pilot.first_name
+      fill_in "Last name", with: pilot.last_name 
+      fill_in "Aircraft ident", with: pilot.aircraft_ident
+      fill_in "Aircraft type", with: pilot.aircraft_type 
+      fill_in "Home address", with: pilot.home_address 
+      fill_in "Phone number", with: pilot.phone_number 
+      fill_in "Bio", with: pilot.bio
+
+      click_button "Create Pilot profile"
+
+      expect(page).to have_current_path(pilot_profile_path(PilotProfile.last))
+      expect(page).to have_content("Pilot profile was successfully created.")
+    end
+  end
+

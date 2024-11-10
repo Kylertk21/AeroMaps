@@ -6,7 +6,7 @@ class User < ApplicationRecord
 
          validate :email_format
          def email_format
-             unless email =~ /\A[-\w!#$%&'*+=?`{|}~^]+(?:\.[\w!#$%&'*+=?`{|}~^-]+)*@[a-zA-Z0-9-]+\.[a-zA-Z]{2,6}\z/
+             unless email =~ /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
                  errors.add(:email, "must be a valid email address")
              end
          end
