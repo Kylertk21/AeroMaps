@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :forum_posts
   resources :flight_plans
   resources :pilot_profiles
+  resources :weather
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
