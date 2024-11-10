@@ -1,0 +1,7 @@
+<h1>Weather</h1>
+<div id="map" style="height: 500px; width: 100%"></div>
+
+<h2>METAR DATA</h2>
+<pre><%= @metar_data %></pre>
+
+<div id="metar" metar-data="<%= @metar_data.to_json %>"></div>
