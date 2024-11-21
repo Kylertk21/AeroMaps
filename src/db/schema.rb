@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_11_09_055302) do
+ActiveRecord::Schema[7.1].define(version: 2024_11_21_193431) do
+  create_table "comments", force: :cascade do |t|
+    t.text "body"
+    t.integer "post_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_comments_on_post_id"
+  end
+
   create_table "flight_plans", force: :cascade do |t|
     t.string "departure"
     t.time "time_of_departure"
@@ -29,7 +37,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_09_055302) do
   create_table "forum_posts", force: :cascade do |t|
     t.string "post_topic"
     t.text "post_text"
-    t.text "comments"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -46,8 +53,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_09_055302) do
     t.datetime "updated_at", null: false
     t.integer "flight_plans_id"
     t.integer "forum_posts_id"
+    t.integer "user_id"
     t.index ["flight_plans_id"], name: "index_pilot_profiles_on_flight_plans_id"
     t.index ["forum_posts_id"], name: "index_pilot_profiles_on_forum_posts_id"
+    t.index ["user_id"], name: "index_pilot_profiles_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -65,6 +74,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_09_055302) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "comments", "posts"
   add_foreign_key "pilot_profiles", "flight_plans", column: "flight_plans_id"
   add_foreign_key "pilot_profiles", "forum_posts", column: "forum_posts_id"
   add_foreign_key "users", "pilot_profiles", column: "pilot_profiles_id"

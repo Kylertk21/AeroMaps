@@ -9,6 +9,8 @@ class ForumPostsController < ApplicationController
 
   # GET /forum_posts/1 or /forum_posts/1.json
   def show
+    @forum_post = ForumPost.find(params[:id])
+    @comment = Comment.new
   end
 
   # GET /forum_posts/new

@@ -13,7 +13,11 @@ class PilotProfilesController < ApplicationController
 
   # GET /pilot_profiles/new
   def new
-    @pilot_profile = PilotProfile.new
+    if current_user.pilot_profile
+      redirect_to current_user.pilot_profile, alert: 'You already have a profile'
+    else
+      @pilot_profile = PilotProfile.new
+    end
   end
 
   # GET /pilot_profiles/1/edit
@@ -22,11 +26,13 @@ class PilotProfilesController < ApplicationController
 
   # POST /pilot_profiles or /pilot_profiles.json
   def create
-    @pilot_profile = PilotProfile.new(pilot_profile_params)
-
-    respond_to do |format|
+    if current_user.pilot_profile
+      redirect_to current_user.pilot_profile, alert: 'You already have a profile'
+    else
+      @pilot_profile = current_user.build_pilot_profile(pilot_profile_params)
+      respond_to do |format|
       if @pilot_profile.save
-        format.html { redirect_to @pilot_profile, notice: "Pilot profile was successfully created." }
+        format.html { redirect_to @pilot_profile, notice: "Profile was successfully created." }
         format.json { render :show, status: :created, location: @pilot_profile }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -34,6 +40,7 @@ class PilotProfilesController < ApplicationController
       end
     end
   end
+end
 
   # PATCH/PUT /pilot_profiles/1 or /pilot_profiles/1.json
   def update
