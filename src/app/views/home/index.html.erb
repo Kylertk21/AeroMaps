@@ -1,6 +1,7 @@
 <h1>Home</h1>
-<%= link_to 'Home', root_path %>
-<%= link_to 'Profile', pilot_profiles_path %>
-<%= link_to 'Flight Plans', flight_plans_path %> 
-<%= link_to 'Forum', forum_posts_path %>
-<%= link_to 'Map', map_path %>
+<%= button_to 'Home', root_path, method: :get %>
+<%= button_to 'Profile', pilot_profiles_path, method: :get %>
+<%= button_to 'Flight Plans', flight_plans_path, method: :get %> 
+<%= button_to 'Forum', forum_posts_path, method: :get %>
+<%= button_to 'Map', map_path, method: :get %>
+<%= button_to 'Sign Out', destroy_user_session_path, method: :delete %>
