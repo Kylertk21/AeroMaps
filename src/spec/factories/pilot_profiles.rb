@@ -7,6 +7,7 @@ FactoryBot.define do
       home_address { "12345 Test Ln, Test City, CO, 80208" }
       phone_number { 123456789 }
       bio { "Test, Test, Test, Test" }
+      association :user, factory: :user
     end
   
     trait :emptyprofile do 

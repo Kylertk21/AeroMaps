@@ -73,7 +73,7 @@ feature "Pilot Profile creation", type: :feature do
       click_button "Create Pilot profile"
 
       expect(page).to have_current_path(pilot_profile_path(PilotProfile.last))
-      expect(page).to have_content("Pilot profile was successfully created.")
+      expect(page).to have_content("Profile was successfully created.")
     end
 
     scenario "With invalid pilot credentials" do 
