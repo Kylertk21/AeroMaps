@@ -10,6 +10,7 @@ class ForumPostsController < ApplicationController
   # GET /forum_posts/1 or /forum_posts/1.json
   def show
     @forum_post = ForumPost.find(params[:id])
+    @comments = @forum_post.comments
     @comment = Comment.new
   end
 
@@ -68,6 +69,6 @@ class ForumPostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def forum_post_params
-      params.require(:forum_post).permit(:post_topic, :post_text, :comments)
+      params.require(:forum_post).permit(:post_topic, :post_text)
     end
 end

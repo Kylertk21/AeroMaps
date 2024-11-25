@@ -3,8 +3,32 @@
 <%= render @forum_post %>
 
 <div>
-  <%= link_to "Edit this forum post", edit_forum_post_path(@forum_post) %> |
-  <%= link_to "Back to forum posts", forum_posts_path %>
+<% if @comments.any? %>
+  <ul>
+    <% @comments.each do |comment| %>
+      <li>
+        <strong><%= comment.body %></strong>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+      <p>No Comments</p>
+<% end %>
+</div>
 
+<%= form_with(model: [@forum_post, @comment], local: true) do |form| %>
+  <div class="form-group">
+    <%= form.label :body %>
+    <%= form.text_area :body, class: 'form-control' %>
+  </div>
+  <%= form.submit 'Add Comment', class: 'btn btn-primary' %>
+<% end %>
+
+
+
+
+<div>
+  <%= link_to "Edit this forum post", edit_forum_post_path(@forum_post) %>
+  <%= link_to "Back to forum posts", forum_posts_path %>
   <%= button_to "Destroy this forum post", @forum_post, method: :delete %>
 </div>
