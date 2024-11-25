@@ -4,12 +4,13 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
          
-         has_one :pilot_profile, dependent: :destroy # user can only have on pilot_profile
-         validate :email_format                      # destroys if user is deleted
+         has_one :pilot_profile, dependent: :destroy
+         validate :email_format                      
          def email_format
              unless email =~ /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
                  errors.add(:email, "must be a valid email address")
              end
          end
       
+         private
 end

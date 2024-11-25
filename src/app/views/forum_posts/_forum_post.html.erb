@@ -11,8 +11,8 @@
 
   <% forum_post.comments.each do |comment| %>
     <div class="comment">
-      <p><strong>Pilot:</strong> <%= comment.pilot_profile ? comment.pilot_profiles.first_name : "Guest" %></p>
-      <p><strong>Commented:</strong> <%= comment.body %></p>
+      <p><strong>Pilot:</strong> <%= comment.pilot_profile&.first_name || "Guest" %></p>
+      <p><%= comment.body %></p>
     </div>
   <% end %>
 </div>

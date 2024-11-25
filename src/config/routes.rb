@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     passwords: 'users/passwords'
   }
   get 'home/index'
-
+  get '/profile', to: 'pilot_profiles#redirect_to_profile'
   resources :forum_posts do
     resources :comments, only: [:create]
   end
