@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+
+    enum role: { user: 'user', admin: 'admin', super_admin: 'super_admin' }
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -11,6 +13,12 @@ class User < ApplicationRecord
                  errors.add(:email, "must be a valid email address")
              end
          end
-      
-         private
+
+         def admin?
+            role == "admin" || role == "super_admin"
+         end
+
+         def super_admin?
+            role == "super_admin"
+         end
 end
