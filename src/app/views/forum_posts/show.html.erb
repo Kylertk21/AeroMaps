@@ -2,20 +2,6 @@
 
 <%= render @forum_post %>
 
-<div>
-<% if @comments.any? %>
-  <ul>
-    <% @comments.each do |comment| %>
-      <li>
-        <strong><%= comment.body %></strong>
-      </li>
-    <% end %>
-  </ul>
-<% else %>
-      <p>No Comments</p>
-<% end %>
-</div>
-
 <%= form_with(model: [@forum_post, @comment], local: true) do |form| %>
   <div class="form-group">
     <%= form.label :body %>
@@ -23,9 +9,6 @@
   </div>
   <%= form.submit 'Add Comment', class: 'btn btn-primary' %>
 <% end %>
-
-
-
 
 <div>
   <%= link_to "Edit this forum post", edit_forum_post_path(@forum_post) %>

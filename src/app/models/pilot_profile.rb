@@ -4,6 +4,6 @@ class PilotProfile < ApplicationRecord
     :home_address, :phone_number, :bio, :user, presence: true
     
     has_many :flight_plans
-    has_many :forum_posts, dependent: :destroy
-    has_many :comments, dependent: :destroy
+    has_many :forum_posts
+    has_many :comments
 end
