@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_11_25_001831) do
+ActiveRecord::Schema[7.1].define(version: 2024_11_25_095058) do
   create_table "comments", force: :cascade do |t|
     t.text "body"
     t.integer "forum_post_id", null: false
@@ -41,6 +41,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_25_001831) do
     t.text "post_text"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "pilot_profile_id", null: false
+    t.index ["pilot_profile_id"], name: "index_forum_posts_on_pilot_profile_id"
   end
 
   create_table "pilot_profiles", force: :cascade do |t|
@@ -73,4 +75,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_25_001831) do
   add_foreign_key "comments", "forum_posts"
   add_foreign_key "comments", "forum_posts"
   add_foreign_key "comments", "pilot_profiles", column: "pilot_profiles_id"
+  add_foreign_key "forum_posts", "pilot_profiles"
 end
