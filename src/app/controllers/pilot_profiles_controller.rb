@@ -1,6 +1,7 @@
 class PilotProfilesController < ApplicationController
   before_action :set_pilot_profile, only: %i[ show edit update destroy ]
   before_action :authenticate_user!
+  before_action :authorize_user!, only: %i[ edit update destroy ]
 
   # GET /pilot_profiles or /pilot_profiles.json
   def index
@@ -13,7 +14,11 @@ class PilotProfilesController < ApplicationController
 
   # GET /pilot_profiles/new
   def new
-    @pilot_profile = PilotProfile.new
+    if current_user.pilot_profile
+      redirect_to current_user.pilot_profile, alert: 'You already have a profile'
+    else
+      @pilot_profile = PilotProfile.new
+    end
   end
 
   # GET /pilot_profiles/1/edit
@@ -22,11 +27,13 @@ class PilotProfilesController < ApplicationController
 
   # POST /pilot_profiles or /pilot_profiles.json
   def create
-    @pilot_profile = PilotProfile.new(pilot_profile_params)
-
-    respond_to do |format|
+    if current_user.pilot_profile
+      redirect_to current_user.pilot_profile, alert: 'You already have a profile'
+    else
+      @pilot_profile = current_user.build_pilot_profile(pilot_profile_params)
+      respond_to do |format|
       if @pilot_profile.save
-        format.html { redirect_to @pilot_profile, notice: "Pilot profile was successfully created." }
+        format.html { redirect_to @pilot_profile, notice: "Profile was successfully created." }
         format.json { render :show, status: :created, location: @pilot_profile }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -34,6 +41,7 @@ class PilotProfilesController < ApplicationController
       end
     end
   end
+end
 
   # PATCH/PUT /pilot_profiles/1 or /pilot_profiles/1.json
   def update
@@ -58,6 +66,14 @@ class PilotProfilesController < ApplicationController
     end
   end
 
+  def redirect_to_profile 
+    if current_pilot_profile
+      redirect_to pilot_profile_path(current_pilot_profile)
+    else
+      redirect_to new_pilot_profile_path, alert: "Please Create a Profile"
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_pilot_profile
@@ -67,5 +83,9 @@ class PilotProfilesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def pilot_profile_params
       params.require(:pilot_profile).permit(:first_name, :last_name, :aircraft_ident, :aircraft_type, :home_address, :phone_number, :bio)
+    end
+
+    def authorize_user!
+      redirect_to root_path, alert: "Invalid User" unless @pilot_profile.user == current_user
     end
 end

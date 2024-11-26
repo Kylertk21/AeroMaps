@@ -9,9 +9,10 @@
     <%= forum_post.post_text %>
   </p>
 
-  <p>
-    <strong>Comments:</strong>
-    <%= forum_post.comments %>
-  </p>
-
+  <% forum_post.comments.each do |comment| %>
+    <div class="comment">
+      <p><strong>Pilot:</strong> <%= comment.pilot_profile&.first_name || "Guest" %></p>
+      <p><%= comment.body %></p>
+    </div>
+  <% end %>
 </div>

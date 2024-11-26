@@ -6,9 +6,7 @@
   <% @pilot_profiles.each do |pilot_profile| %>
     <%= render pilot_profile %>
     <p>
-      <%= link_to "Show this pilot profile", pilot_profile %>
+      <%= link_to "Show Profile", pilot_profile %>
     </p>
   <% end %>
 </div>
-
-<%= link_to "New pilot profile", new_pilot_profile_path %>

@@ -72,3 +72,9 @@ end
 
 # User Authentication
 gem "devise", "~> 4.9"
+
+# For API requests
+gem "httparty"
+
+# For comment functionality
+gem "jquery-rails"

@@ -10,7 +10,7 @@ WORKDIR /workspace
 # Install Node.js, Yarn, and system dependencies
 RUN apt-get update -qq && \
     apt-get install -y nodejs && \
-    apt-get install -y yarn build-essential gh libpq-dev sqlite3 libsqlite3-dev tzdata libvips vim git gh && \
+    apt-get install -y yarn build-essential gh npm libpq-dev sqlite3 libsqlite3-dev tzdata libvips vim git gh && \
     rm -rf /var/lib/apt/lists/*
 
 # Install Bundler

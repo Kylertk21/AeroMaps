@@ -1,6 +1,9 @@
 class ForumPostsController < ApplicationController
   before_action :set_forum_post, only: %i[ show edit update destroy ]
   before_action :authenticate_user!
+  before_action :ensure_pilot_profile, except: [ :show, :index ]
+  before_action :authorize_user!, only: %i[ edit update destroy]
+  before_action :authorize_admin!, only: [:destroy]
 
   # GET /forum_posts or /forum_posts.json
   def index
@@ -9,6 +12,9 @@ class ForumPostsController < ApplicationController
 
   # GET /forum_posts/1 or /forum_posts/1.json
   def show
+    @forum_post = ForumPost.find(params[:id])
+    @comments = @forum_post.comments
+    @comment = Comment.new
   end
 
   # GET /forum_posts/new
@@ -22,11 +28,11 @@ class ForumPostsController < ApplicationController
 
   # POST /forum_posts or /forum_posts.json
   def create
-    @forum_post = ForumPost.new(forum_post_params)
+    @forum_post = current_pilot_profile.forum_posts.build(forum_post_params)
 
     respond_to do |format|
       if @forum_post.save
-        format.html { redirect_to @forum_post, notice: "Forum post was successfully created." }
+        format.html { redirect_to @forum_post, notice: "Posted!" }
         format.json { render :show, status: :created, location: @forum_post }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -66,6 +72,16 @@ class ForumPostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def forum_post_params
-      params.require(:forum_post).permit(:post_topic, :post_text, :comments)
+      params.require(:forum_post).permit(:post_topic, :post_text)
+    end
+
+    def authorize_user!
+      redirect_to forum_posts_path, alert: "Invalid User" unless @forum_post.pilot_profile == current_pilot_profile
+    end
+
+    def authorize_admin!
+      unless current_user.admin? || current_user.super_admin?
+        redirect_to forum_posts_path, alert: "You are not authorized to do this!"
+      end
     end
 end

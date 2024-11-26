@@ -1,4 +1,4 @@
-<%= form_with(model: forum_post) do |form| %>
+<%= form_with(model: @forum_post, local: true) do |form| %>
   <% if forum_post.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(forum_post.errors.count, "error") %> prohibited this forum_post from being saved:</h2>
@@ -19,11 +19,6 @@
   <div>
     <%= form.label :post_text, style: "display: block" %>
     <%= form.text_area :post_text %>
-  </div>
-
-  <div>
-    <%= form.label :comments, style: "display: block" %>
-    <%= form.text_area :comments %>
   </div>
 
   <div>

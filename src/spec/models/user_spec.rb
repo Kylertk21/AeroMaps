@@ -84,7 +84,7 @@ feature "User signs in", type: :feature do
   end
 
   scenario "With invalid credentials" do
-    visit '/users/sign_in'
+    visit "/users/sign_in"
       fill_in "Email", with: ""
       fill_in "Password", with: ""
       click_button "Log in"
