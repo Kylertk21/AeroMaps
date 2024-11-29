@@ -10,17 +10,21 @@ WORKDIR /workspace
 # Install Node.js, Yarn, and system dependencies
 RUN apt-get update -qq && \
     apt-get install -y nodejs && \
-    apt-get install -y yarn build-essential gh npm libpq-dev sqlite3 libsqlite3-dev tzdata libvips vim git gh && \
+    apt-get install -y yarn build-essential gh npm libpq-dev tzdata libvips vim git gh && \
     rm -rf /var/lib/apt/lists/*
 
 # Install Bundler
 RUN gem install bundler
 
-COPY Gemfile ./
+COPY Gemfile src/Gemfile.lock ./
 
 # Install application gems
 RUN bundle install
 
-COPY src /workspace
+COPY src /workspace/src
 
-CMD ["bash"]
+WORKDIR /workspace/src
+
+RUN RAILS_ENV=production SECRET_KEY_BASE=$(rails secret) rails assets:precompile
+
+CMD ["rails", "server", "-b", "0.0.0.0"]
