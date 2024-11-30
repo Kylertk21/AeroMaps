@@ -3,7 +3,6 @@ class ForumPostsController < ApplicationController
   before_action :authenticate_user!
   before_action :ensure_pilot_profile, except: [ :show, :index ]
   before_action :authorize_user!, only: %i[ edit update destroy]
-  before_action :authorize_admin!, only: [:destroy]
 
   # GET /forum_posts or /forum_posts.json
   def index
@@ -76,12 +75,9 @@ class ForumPostsController < ApplicationController
     end
 
     def authorize_user!
-      redirect_to forum_posts_path, alert: "Invalid User" unless @forum_post.pilot_profile == current_pilot_profile
-    end
-
-    def authorize_admin!
-      unless current_user.admin? || current_user.super_admin?
-        redirect_to forum_posts_path, alert: "You are not authorized to do this!"
+      unless current_user.admin? || current_user.super_admin? || @forum_post.pilot_profile == current_pilot_profile
+        redirect_to forum_posts_path, alert: "You are not authorized to do this!" 
       end
     end
+
 end
