@@ -1,7 +1,11 @@
+<div class="d-flex flex-column align-items-center">
+
+<h1> Pilot Profile </h1>
+
 <p style="color: green"><%= notice %></p>
 
 <%= render @pilot_profile %>
 
-<div>
-  <%= link_to "Edit Profile", edit_pilot_profile_path(@pilot_profile) %>
+  <%= link_to "Edit Profile", edit_pilot_profile_path(@pilot_profile), class: "btn btn-warning" %>
+
 </div>

@@ -1,9 +1,11 @@
+<div class: "container d-flex flex-column" style="margin-top: 40vh;">
+
 <h1>Editing pilot profile</h1>
 
 <%= render "form", pilot_profile: @pilot_profile %>
 
-<br>
+  <div class="d-flex justify-content-center">
+    <%= link_to "Show Profile", @pilot_profile, class: "btn btn-primary me-4 mt-3 btn-sm" %>
+  </div>
 
-<div>
-  <%= link_to "Show Profile", @pilot_profile %>
 </div>

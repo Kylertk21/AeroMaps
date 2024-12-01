@@ -47,7 +47,7 @@
             <%= link_to 'Map', map_path, method: :get, class: 'btn btn-dark nav-link text-white' %>
           </li>
           <li class="nav-item">
-            <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: 'btn btn-dark nav-link text-white' %>
+            <%= button_to 'Sign Out', destroy_user_session_path, method: :delete, class: 'btn btn-dark nav-link text-white' %>
           </li>
         </ul>
         </div>
@@ -65,7 +65,7 @@
     <% end %>
   </div>
   
-  <div class="container d-flex flex-column justify-content-center align-items-center" style="height:50vh";>
+  <div class="container d-flex flex-column justify-content-center">
   <%= yield %>
   </div>
 
