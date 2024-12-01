@@ -6,7 +6,12 @@ class ForumPostsController < ApplicationController
 
   # GET /forum_posts or /forum_posts.json
   def index
-    @forum_posts = ForumPost.all
+    @search_params = params[:search]||{}
+    if @search_params.present?
+      @forum_posts = ForumPost.by_post_topic(@search_params)
+    else
+      @forum_posts = ForumPost.all
+    end
   end
 
   # GET /forum_posts/1 or /forum_posts/1.json

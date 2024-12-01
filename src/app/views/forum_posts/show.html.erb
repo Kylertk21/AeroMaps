@@ -1,8 +1,7 @@
-<div class="container d-flex flex-column form-group align-items-center mt-5 pt-5 mb-3">
-
-<h2>Pilot's Forum Post</h2>
-
+<div class="container d-flex flex-column form-group align-items-center mb-3">
 <p style="color: green"><%= notice %></p>
+
+<h2><%= @forum_post.pilot_profile&.first_name %>'s Post </h2>
 
 <%= render @forum_post %>
   
