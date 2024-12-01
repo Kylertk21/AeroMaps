@@ -2,3 +2,5 @@
 
 pin "application"
 pin "windy", to: "windy.js"
+pin "trix"
+pin "@rails/actiontext", to: "actiontext.esm.js"
