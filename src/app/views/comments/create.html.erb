@@ -1,11 +1,11 @@
 <h1>Create Comment</h1>
 <% form_with(model: [@forum_post, @forum_post.comments.build], local: true) do |form| %>
-    <div class "field">
+    <div class="field ms-3">
         <%= form.label :body, "Your Comment" %>
-        <%= form.text_area :body, rows: 5 %>
-    </div>
+        <%= form.text_area :body, rows: 5%>
 
     <div class="actions">
         <%= form.submit "Post Comment" %>
     </div>
 <% end %>
+</div>
