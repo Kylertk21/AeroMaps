@@ -18,8 +18,8 @@
     </div>
   <% end %>
 
-  <div class="d-flex actions align-items-center mt-3 mb-3">
-    <%= f.submit "Log in", class: 'btn btn-primary' %>
+  <div class="d-flex actions align-items-center mt-3 mb-3 ms-3">
+    <%= f.submit "Log in", class: 'btn btn-primary me-3' %>
     <% end %>
 
     <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
@@ -27,7 +27,7 @@
     <% end %>
   </div>
 
-<div class="d-flex actions align-items-start">
+<div class="d-flex actions align-items-start ms-2">
   <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
     <%= link_to "Forgot your password?", new_password_path(resource_name), class: 'btn btn-warning' %><br />
     <% end %>

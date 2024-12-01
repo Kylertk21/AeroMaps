@@ -1,4 +1,4 @@
-<div class="d-flex flex-column align-items-start mt-3 col-10">
+
   <%- if controller_name != 'sessions' %>
     <%= link_to "Log in", new_session_path(resource_name), class: 'btn btn-primary mb-2' %><br />
   <% end %>
@@ -16,4 +16,4 @@
       <%= button_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider), data: { turbo: false } %><br />
     <% end %>
   <% end %>
-</div>
+

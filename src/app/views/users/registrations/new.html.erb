@@ -21,9 +21,14 @@
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
-  <div class="actions">
-    <%= f.submit "Sign up", class: "btn btn-primary mt-2" %>
-  </div>
-<% end %>
+  <div class="d-flex actions align-items-start mt-3 ms-5">
 
-<%= render "users/shared/links" %>
+  <%= render "users/shared/links" %>
+ 
+
+    <%= f.submit "Sign up", class: "btn btn-success ms-3" %>
+
+<% end %>
+</div>
+
+
