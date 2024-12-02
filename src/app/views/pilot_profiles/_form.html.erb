@@ -12,42 +12,42 @@
     </div>
   <% end %>
 
-  <div>
+  <div aria-label="First Name Field">
     <%= form.label :first_name, style: "display: block" %>
     <%= form.text_field :first_name %>
   </div>
 
-  <div>
+  <div aria-label="Last Name Field">
     <%= form.label :last_name, style: "display: block" %>
     <%= form.text_field :last_name %>
   </div>
 
-  <div>
+  <div aria-label="Aircraft Identification Field">
     <%= form.label :aircraft_ident, style: "display: block" %>
     <%= form.text_field :aircraft_ident %>
   </div>
 
-  <div>
+  <div aria-label="Aircraft Type Field">
     <%= form.label :aircraft_type, style: "display: block" %>
     <%= form.text_field :aircraft_type %>
   </div>
 
-  <div>
+  <div aria-label="Home Address Field">
     <%= form.label :home_address, style: "display: block" %>
     <%= form.text_field :home_address %>
   </div>
 
-  <div>
+  <div aria-label="Phone Number Field">
     <%= form.label :phone_number, style: "display: block" %>
     <%= form.number_field :phone_number %>
   </div>
 
-  <div>
+  <div aria-label="Bio Field">
     <%= form.label :bio, style: "display: block" %>
     <%= form.text_area :bio %>
   </div>
 
-  <div>
+  <div aria-label="Submit Button">
     <%= form.submit class: "btn btn-warning mt-3 mb-2"%>
   </div>
 <% end %>

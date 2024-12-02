@@ -2,12 +2,11 @@
 
     <h1>Create Comment</h1>
     <% form_with(model: [@forum_post, @forum_post.comments.build], local: true) do |form| %>
-        <div class="field ms-3">
+        <div class="field ms-3" aria-label="Comment Text Field">
             <%= form.label :body, "Your Comment" %>
             <%= form.text_area :body %>
-
-        <div class="actions">
-            <%= form.submit "Post Comment" %>
+        <div class="actions" aria-label="Submit Comment Button">
+            <%= form.submit "Post Comment"%>
         </div>
     <% end %>
     </div>

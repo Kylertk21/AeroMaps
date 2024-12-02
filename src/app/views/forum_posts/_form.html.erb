@@ -11,17 +11,17 @@
     </div>
   <% end %>
 
-  <div>
+  <div aria-label="Post Topic Field">
     <%= form.label :post_topic, style: "display: block", class: "mt-3" %>
     <%= form.text_field :post_topic %>
   </div>
 
-  <div>
+  <div aria-label="Post Text Field">
     <%= form.label :post_text, style: "display: block" %>
     <%= form.text_area :post_text %>
   </div>
 
-  <div>
+  <div aria-label="Submit Post Button">
     <%= form.submit class: "btn btn-primary ms-3 mt-3" %>
   </div>
 <% end %>
